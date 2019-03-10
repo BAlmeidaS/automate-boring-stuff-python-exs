@@ -16,8 +16,11 @@ pp = pprint.PrettyPrinter(indent=2)
 
 mcb_shelf = shelve.open('mcb')
 
-if len(sys.argv) == 3 and sys.argv[1].lower() == 'save':
-    mcb_shelf[sys.argv[2]] = pyperclip.paste()
+if len(sys.argv) == 3:
+    if sys.argv[1].lower() == 'save':
+        mcb_shelf[sys.argv[2]] = pyperclip.paste()
+    elif sys.argv[1].lower() == 'delete':
+        mcb_shelf.pop(str(sys.argv[2]))
 elif len(sys.argv) == 2:
     if sys.argv[1].lower() == 'list':
         pp.pprint(dict(mcb_shelf))
